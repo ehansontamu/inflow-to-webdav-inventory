@@ -42,7 +42,9 @@ jobs:
 
           WEBDAV_URL_TESTING: ${{ secrets.WEBDAV_URL_TESTING }}
           WEBDAV_URL_PROD: ${{ secrets.WEBDAV_URL_PROD }}
-          WEBDAV_USER: ${{ secrets.WEBDAV_USER }}
-          WEBDAV_PASS: ${{ secrets.WEBDAV_PASS }}
+          WEBDAV_USER_TESTING: ${{ secrets.WEBDAV_USER_TESTING }}
+          WEBDAV_PASS_TESTING: ${{ secrets.WEBDAV_PASS_TESTING }}
+          WEBDAV_USER_PROD: ${{ secrets.WEBDAV_USER_PROD }}
+          WEBDAV_PASS_PROD: ${{ secrets.WEBDAV_PASS_PROD }}
         run: |
           python inFlowToWebdav.py
