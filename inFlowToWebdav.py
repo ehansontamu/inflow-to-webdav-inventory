@@ -76,19 +76,18 @@ BC_HEADERS  = {
 print("BigCommerce constants defined (from env vars).")
 
 # ─── WebDAV Servers ────────────────────────────────────────────────────────
-WEBDAV_USER = _env("WEBDAV_USER")
-WEBDAV_PASS = _env("WEBDAV_PASS")
-
 webdav_servers = [
     {
-        'url':      _env("WEBDAV_URL_TESTING"),
-        'username': WEBDAV_USER,
-        'password': WEBDAV_PASS
+        "name":     "testing",
+        "url":      _env("WEBDAV_URL_TESTING"),
+        "username": _env("WEBDAV_USER_TESTING"),
+        "password": _env("WEBDAV_PASS_TESTING"),
     },
     {
-        'url':      _env("WEBDAV_URL_PROD"),
-        'username': WEBDAV_USER,
-        'password': WEBDAV_PASS
+        "name":     "prod",
+        "url":      _env("WEBDAV_URL_PROD"),
+        "username": _env("WEBDAV_USER_PROD"),
+        "password": _env("WEBDAV_PASS_PROD"),
     }
 ]
 print("WebDAV server configurations set (from env vars).")
