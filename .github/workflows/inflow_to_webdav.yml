@@ -1,0 +1,48 @@
+name: InFlow → WebDAV Inventory Sync
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: inflow-to-webdav
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run inventory sync (single execution)
+        env:
+          INFLOW_API_KEY: ${{ secrets.INFLOW_API_KEY }}
+          INFLOW_COMPANY_ID: ${{ secrets.INFLOW_COMPANY_ID }}
+          INFLOW_LOCATION_ID: ${{ secrets.INFLOW_LOCATION_ID }}
+          INFLOW_BASE_URL: https://cloudapi.inflowinventory.com
+
+          BC_STORE_ID: ${{ secrets.BC_STORE_ID }}
+          BC_AUTH_TOKEN: ${{ secrets.BC_AUTH_TOKEN }}
+          BC_BASE_URL: https://api.bigcommerce.com/stores
+
+          WEBDAV_URL_TESTING: ${{ secrets.WEBDAV_URL_TESTING }}
+          WEBDAV_URL_PROD: ${{ secrets.WEBDAV_URL_PROD }}
+          WEBDAV_USER: ${{ secrets.WEBDAV_USER }}
+          WEBDAV_PASS: ${{ secrets.WEBDAV_PASS }}
+        run: |
+          python inFlowToWebdav.py
