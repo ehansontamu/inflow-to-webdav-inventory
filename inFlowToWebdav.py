@@ -370,12 +370,19 @@ def fetch_product_list():
 
     filtered_products = []
     for p in products:
-        pid        = p.get('productId')
-        raw_avail  = summary_map.get(pid, {}).get('quantityAvailable', 0)
+        pid = p.get('productId')
+
+        raw_avail = summary_map.get(pid, {}).get('quantityAvailable', 0)
         try:
             qty_avail = int(float(raw_avail))
         except (TypeError, ValueError):
             qty_avail = 0
+
+        raw_on_po = summary_map.get(pid, {}).get('quantityOnPurchaseOrder', 0)
+        try:
+            qty_on_po = int(float(raw_on_po))
+        except (TypeError, ValueError):
+            qty_on_po = 0
 
         sku_val   = p.get('sku', '')
         sku_upper = sku_val.upper()
@@ -404,6 +411,7 @@ def fetch_product_list():
             'name':       p.get('name', ''),
             'Category':   p.get('category', {}).get('name', ''),
             'Qty':        qty_avail,
+            'quantityOnPurchaseOrder': qty_on_po,
             'bc_status9': bc_status9.get(sku_upper, 0),
             'bc_status7': bc_status7.get(sku_upper, 0),
 
