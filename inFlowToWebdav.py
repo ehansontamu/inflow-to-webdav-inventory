@@ -402,8 +402,15 @@ def fetch_product_list():
             elif name == "RetailPrice":
                 retail_price = price_val
 
-        # closeout value
-        closeout_val = p.get('customFields', {}).get('custom1', '')
+        custom_fields = p.get('customFields', {}) or {}
+
+        # closeout + benchmark values
+        closeout_val     = custom_fields.get('custom1', '')
+        overall_score    = custom_fields.get('custom3', '')
+        cpu_score        = custom_fields.get('custom4', '')
+        gpu_score        = custom_fields.get('custom5', '')
+        memory_score     = custom_fields.get('custom6', '')
+        storage_score    = custom_fields.get('custom7', '')
 
         filtered_products.append({
             'productId':  pid,
@@ -419,6 +426,12 @@ def fetch_product_list():
             'ABPrice':     ab_price,
             'RetailPrice': retail_price,
             'Closeout':    closeout_val,
+
+            'OverallScore': overall_score,
+            'CPUScore':     cpu_score,
+            'GPUScore':     gpu_score,
+            'MemoryScore':  memory_score,
+            'StorageScore': storage_score,
 
             'PriceBySchemeId': by_id,
             'PriceRows':       rows
