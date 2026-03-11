@@ -411,6 +411,9 @@ def fetch_product_list():
         gpu_score        = custom_fields.get('custom5', '')
         memory_score     = custom_fields.get('custom6', '')
         storage_score    = custom_fields.get('custom7', '')
+        architecture     = custom_fields.get('custom8', '')
+        product_link     = custom_fields.get('custom9', '')
+        gpu_type         = custom_fields.get('custom10', '')
 
         filtered_products.append({
             'productId':  pid,
@@ -432,6 +435,9 @@ def fetch_product_list():
             'GPUScore':     gpu_score,
             'MemoryScore':  memory_score,
             'StorageScore': storage_score,
+            'Architecture': architecture,
+            'ProductLink':  product_link,
+            'GPUType':      gpu_type,
 
             'PriceBySchemeId': by_id,
             'PriceRows':       rows
