@@ -61,7 +61,7 @@ LOCATION_ID = _env("INFLOW_LOCATION_ID")
 INFLOW_HEADERS = {
     'Authorization': f'Bearer {API_KEY}',
     'Content-Type':  'application/json',
-    'Accept':        'application/json;version=2024-03-12'
+    'Accept':        'application/json;version=2026-02-24'
 }
 print("InFlow constants defined (from env vars).")
 
